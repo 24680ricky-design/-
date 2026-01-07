@@ -1,0 +1,7 @@
+{
+  "name": "配對王 (Matching King)",
+  "description": "A special education assistive web app focusing on picture-to-text matching, impulse control, and fine motor skills.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
