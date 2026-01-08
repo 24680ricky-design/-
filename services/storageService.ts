@@ -25,7 +25,14 @@ export const getCollections = (): Collection[] => {
 };
 
 export const saveCollections = (collections: Collection[]) => {
-  localStorage.setItem(STORAGE_KEY_COLLECTIONS, JSON.stringify(collections));
+  try {
+    localStorage.setItem(STORAGE_KEY_COLLECTIONS, JSON.stringify(collections));
+  } catch (e) {
+    if (e instanceof DOMException && e.name === 'QuotaExceededError') {
+      alert("儲存空間已滿！請嘗試刪除一些不必要的教材，或是減少照片數量。");
+    }
+    console.error("Save collections failed", e);
+  }
 };
 
 export const getSettings = (): Settings => {
@@ -38,7 +45,11 @@ export const getSettings = (): Settings => {
 };
 
 export const saveSettings = (settings: Settings) => {
-  localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(settings));
+  try {
+    localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(settings));
+  } catch (e) {
+    console.error("Save settings failed", e);
+  }
 };
 
 export const getActiveCollectionId = (): string => {
